@@ -1,0 +1,48 @@
+
+<html>
+<head>
+    <title>Timeline | HTML data</title>
+
+    <style>
+        body, html {
+            font-family: arial, sans-serif;
+            font-size: 11pt;
+        }
+        span {
+            color: red;
+        }
+        span.large {
+            font-size: 200%;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<p>
+    Your facebook photos presented on timeline.
+</p>
+<div id="visualization"></div>
+
+<script>
+    // create a couple of HTML items in various ways
+
+    // create data and a Timeline
+    var container = document.getElementById('visualization');
+    var items = new vis.DataSet([
+        {% for index, result in results %}
+        {
+            id: {{ index }},
+            content: '<a href="{{ result.src }}"> <img src="{{ result.src }}" style="width: {{ 100 * result.ratio }}px; height: 100px;"></a>',
+            start: '{{ result.created | date }}'
+        },
+        {% endfor %}
+    ]);
+    var options = {};
+    var timeline = new vis.Timeline(container, items, options);
+    document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
+</script>
+</body>
+</html>
