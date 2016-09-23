@@ -11,11 +11,20 @@ class Timeline
      */
     protected $facebook;
 
-    public function __construct($facebook)
+    /**
+     * Timeline constructor.
+     * @param Facebook $facebook
+     */
+    public function __construct(Facebook $facebook)
     {
         $this->facebook = $facebook;
     }
 
+    /**
+     * @param string $token
+     *
+     * @return array
+     */
     public function generate($token)
     {
         $data = $this->callFb($token);
@@ -36,6 +45,12 @@ class Timeline
         return $results;
     }
 
+    /**
+     * @param string $token
+     * @param string $append
+     *
+     * @return array
+     */
     protected function callFb($token, $append = "") {
         $response = $this->facebook->get("/me/photos?fields=images,created_time" . $append, $token);
         $body = $response->getDecodedBody();

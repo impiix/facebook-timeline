@@ -2,11 +2,25 @@
   "require": {
     "facebook/graph-sdk": "5.3.1",
     "twig/twig": "v1.24.2",
-    "symfony/yaml": "v3.1.4"
+    "symfony/yaml": "v3.1.4",
+    "incenteev/composer-parameter-handler": "v2.1.2"
   },
   "autoload": {
     "psr-4": {
       "App\\": "src/"
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+    ]
+  },
+  "extra": {
+    "incenteev-parameters": {
+      "file": "config.yml"
     }
   }
 }
