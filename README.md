@@ -1,0 +1,1 @@
+Facebook app that fetches user's photos and displays them on horizontal timeline using vis js library.
